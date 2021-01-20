@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище HOUSE_MANAGEMENTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account">
+    <Key>
+      <PropertyRef Name="IdAccount" />
+    </Key>
+    <Property Name="IdAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Apartment">
+    <Key>
+      <PropertyRef Name="IdApartment" />
+    </Key>
+    <Property Name="IdApartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HouseId" Type="int" Nullable="false" />
+    <Property Name="QuantityLodgers" Type="int" Nullable="false" />
+    <Property Name="Square" Type="int" Nullable="false" />
+    <Property Name="PaymentId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="House">
+    <Key>
+      <PropertyRef Name="IdHouse" />
+    </Key>
+    <Property Name="IdHouse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="IdPayment" />
+    </Key>
+    <Property Name="IdPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeOfPaymentId" Type="int" Nullable="false" />
+    <Property Name="SquarePrice" Type="int" Nullable="false" />
+    <Property Name="LodgersPrice" Type="int" Nullable="false" />
+    <Property Name="PaymentAmount" Type="int" Nullable="false" />
+    <Property Name="SupposedDatePayment" Type="date" Nullable="false" />
+    <Property Name="DateOfPayment" Type="date" />
+  </EntityType>
+  <EntityType Name="TypeOfPayment">
+    <Key>
+      <PropertyRef Name="IdTypeOfPayment" />
+    </Key>
+    <Property Name="IdTypeOfPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_House_IdHouse_Apartment_IdApartment">
+    <End Role="House" Type="Self.House" Multiplicity="1" />
+    <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="House">
+        <PropertyRef Name="IdHouse" />
+      </Principal>
+      <Dependent Role="Apartment">
+        <PropertyRef Name="HouseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_IdPaiment_Apartment_IdApartment">
+    <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+    <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payment">
+        <PropertyRef Name="IdPayment" />
+      </Principal>
+      <Dependent Role="Apartment">
+        <PropertyRef Name="PaymentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+    <End Role="TypeOfPayment" Type="Self.TypeOfPayment" Multiplicity="1" />
+    <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfPayment">
+        <PropertyRef Name="IdTypeOfPayment" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="TypeOfPaymentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище HOUSE_MANAGEMENTModelContainer">
+    <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TypeOfPayment" EntityType="Self.TypeOfPayment" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_House_IdHouse_Apartment_IdApartment" Association="Self.FK_House_IdHouse_Apartment_IdApartment">
+      <End Role="House" EntitySet="House" />
+      <End Role="Apartment" EntitySet="Apartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_IdPaiment_Apartment_IdApartment" Association="Self.FK_Payment_IdPaiment_Apartment_IdApartment">
+      <End Role="Payment" EntitySet="Payment" />
+      <End Role="Apartment" EntitySet="Apartment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment" Association="Self.FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+      <End Role="TypeOfPayment" EntitySet="TypeOfPayment" />
+      <End Role="Payment" EntitySet="Payment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
