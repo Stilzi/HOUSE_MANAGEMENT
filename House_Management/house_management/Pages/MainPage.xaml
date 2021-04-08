@@ -1,0 +1,39 @@
+﻿<Page x:Class="house_management.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:house_management.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="900"
+      Title="MainPage">
+
+    <Grid Background="White">
+        <TextBlock Text="Выберите таблицу" 
+                   FontSize="40" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Margin="40" 
+                   FontFamily="{DynamicResource MaterialDesignFont}"/>
+        <StackPanel Margin="107,153,93,-53"
+                    Width="700"
+                    Height="700">
+            <Button    x:Name="HouseOpen"
+                   Height="60" 
+                   Width="370"
+                   Margin="0 0 0 100"
+                   Content="Дома на учете" Click="HouseOpen_Click"/>
+            <Button    x:Name="PaymentOpen"
+                   Height="60"
+                   Width="370"
+                   Margin="165,0,165,100"
+                   Content="Оплата" Click="PaymentOpen_Click"/>
+            <Button    x:Name="ApartmentOpen"
+                   Height="60"
+                   Width="370"
+                   Margin="0 0 0 100"
+                   Content="Квартиры на учете" Click="ApartmentOpen_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Page>

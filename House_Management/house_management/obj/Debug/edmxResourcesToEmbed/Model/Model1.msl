@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище HOUSE_MANAGEMENTModelContainer" CdmEntityContainer="HOUSE_MANAGEMENTEntities">
+    <EntitySetMapping Name="Account">
+      <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Apartment">
+      <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Apartment">
+        <MappingFragment StoreEntitySet="Apartment">
+          <ScalarProperty Name="IdApartment" ColumnName="IdApartment" />
+          <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+          <ScalarProperty Name="QuantityLodgers" ColumnName="QuantityLodgers" />
+          <ScalarProperty Name="Square" ColumnName="Square" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="House">
+      <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.House">
+        <MappingFragment StoreEntitySet="House">
+          <ScalarProperty Name="IdHouse" ColumnName="IdHouse" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payment">
+      <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Payment">
+        <MappingFragment StoreEntitySet="Payment">
+          <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
+          <ScalarProperty Name="TypeOfPaymentId" ColumnName="TypeOfPaymentId" />
+          <ScalarProperty Name="SquarePrice" ColumnName="SquarePrice" />
+          <ScalarProperty Name="LodgersPrice" ColumnName="LodgersPrice" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="SupposedDatePayment" ColumnName="SupposedDatePayment" />
+          <ScalarProperty Name="DateOfPayment" ColumnName="DateOfPayment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfPayment">
+      <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.TypeOfPayment">
+        <MappingFragment StoreEntitySet="TypeOfPayment">
+          <ScalarProperty Name="IdTypeOfPayment" ColumnName="IdTypeOfPayment" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

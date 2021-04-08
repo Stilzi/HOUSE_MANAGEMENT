@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище HOUSE_MANAGEMENTModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="IdApartment" />
+          </Key>
+          <Property Name="IdApartment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HouseId" Type="int" Nullable="false" />
+          <Property Name="QuantityLodgers" Type="int" Nullable="false" />
+          <Property Name="Square" Type="int" Nullable="false" />
+          <Property Name="PaymentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="IdHouse" />
+          </Key>
+          <Property Name="IdHouse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="IdPayment" />
+          </Key>
+          <Property Name="IdPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeOfPaymentId" Type="int" Nullable="false" />
+          <Property Name="SquarePrice" Type="int" Nullable="false" />
+          <Property Name="LodgersPrice" Type="int" Nullable="false" />
+          <Property Name="PaymentAmount" Type="int" Nullable="false" />
+          <Property Name="SupposedDatePayment" Type="date" Nullable="false" />
+          <Property Name="DateOfPayment" Type="date" />
+        </EntityType>
+        <EntityType Name="TypeOfPayment">
+          <Key>
+            <PropertyRef Name="IdTypeOfPayment" />
+          </Key>
+          <Property Name="IdTypeOfPayment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_House_IdHouse_Apartment_IdApartment">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="IdHouse" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_IdPaiment_Apartment_IdApartment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="IdPayment" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+          <End Role="TypeOfPayment" Type="Self.TypeOfPayment" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfPayment">
+              <PropertyRef Name="IdTypeOfPayment" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="TypeOfPaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище HOUSE_MANAGEMENTModelContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Apartment" EntityType="Self.Apartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfPayment" EntityType="Self.TypeOfPayment" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_House_IdHouse_Apartment_IdApartment" Association="Self.FK_House_IdHouse_Apartment_IdApartment">
+            <End Role="House" EntitySet="House" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_IdPaiment_Apartment_IdApartment" Association="Self.FK_Payment_IdPaiment_Apartment_IdApartment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment" Association="Self.FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+            <End Role="TypeOfPayment" EntitySet="TypeOfPayment" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HOUSE_MANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="IdApartment" />
+          </Key>
+          <Property Name="IdApartment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HouseId" Type="Int32" Nullable="false" />
+          <Property Name="QuantityLodgers" Type="Int32" Nullable="false" />
+          <Property Name="Square" Type="Int32" Nullable="false" />
+          <Property Name="PaymentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="House" Relationship="Self.FK_House_IdHouse_Apartment_IdApartment" FromRole="Apartment" ToRole="House" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_IdPaiment_Apartment_IdApartment" FromRole="Apartment" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="House">
+          <Key>
+            <PropertyRef Name="IdHouse" />
+          </Key>
+          <Property Name="IdHouse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_House_IdHouse_Apartment_IdApartment" FromRole="House" ToRole="Apartment" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="IdPayment" />
+          </Key>
+          <Property Name="IdPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeOfPaymentId" Type="Int32" Nullable="false" />
+          <Property Name="SquarePrice" Type="Int32" Nullable="false" />
+          <Property Name="LodgersPrice" Type="Int32" Nullable="false" />
+          <Property Name="PaymentAmount" Type="Int32" Nullable="false" />
+          <Property Name="SupposedDatePayment" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfPayment" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK_Payment_IdPaiment_Apartment_IdApartment" FromRole="Payment" ToRole="Apartment" />
+          <NavigationProperty Name="TypeOfPayment" Relationship="Self.FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment" FromRole="Payment" ToRole="TypeOfPayment" />
+        </EntityType>
+        <EntityType Name="TypeOfPayment">
+          <Key>
+            <PropertyRef Name="IdTypeOfPayment" />
+          </Key>
+          <Property Name="IdTypeOfPayment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment" FromRole="TypeOfPayment" ToRole="Payment" />
+        </EntityType>
+        <Association Name="FK_House_IdHouse_Apartment_IdApartment">
+          <End Role="House" Type="Self.House" Multiplicity="1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="House">
+              <PropertyRef Name="IdHouse" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="HouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_IdPaiment_Apartment_IdApartment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="1" />
+          <End Role="Apartment" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="IdPayment" />
+            </Principal>
+            <Dependent Role="Apartment">
+              <PropertyRef Name="PaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+          <End Role="TypeOfPayment" Type="Self.TypeOfPayment" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfPayment">
+              <PropertyRef Name="IdTypeOfPayment" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="TypeOfPaymentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOUSE_MANAGEMENTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Apartment" EntityType="Self.Apartment" />
+          <EntitySet Name="House" EntityType="Self.House" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" />
+          <EntitySet Name="TypeOfPayment" EntityType="Self.TypeOfPayment" />
+          <AssociationSet Name="FK_House_IdHouse_Apartment_IdApartment" Association="Self.FK_House_IdHouse_Apartment_IdApartment">
+            <End Role="House" EntitySet="House" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_IdPaiment_Apartment_IdApartment" Association="Self.FK_Payment_IdPaiment_Apartment_IdApartment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Apartment" EntitySet="Apartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment" Association="Self.FK_Payment_TypeOfPaymentId_TypeOfPayment_IdTypeOfPayment">
+            <End Role="TypeOfPayment" EntitySet="TypeOfPayment" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище HOUSE_MANAGEMENTModelContainer" CdmEntityContainer="HOUSE_MANAGEMENTEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Apartment">
+            <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Apartment">
+              <MappingFragment StoreEntitySet="Apartment">
+                <ScalarProperty Name="IdApartment" ColumnName="IdApartment" />
+                <ScalarProperty Name="HouseId" ColumnName="HouseId" />
+                <ScalarProperty Name="QuantityLodgers" ColumnName="QuantityLodgers" />
+                <ScalarProperty Name="Square" ColumnName="Square" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="House">
+            <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.House">
+              <MappingFragment StoreEntitySet="House">
+                <ScalarProperty Name="IdHouse" ColumnName="IdHouse" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment">
+            <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
+                <ScalarProperty Name="TypeOfPaymentId" ColumnName="TypeOfPaymentId" />
+                <ScalarProperty Name="SquarePrice" ColumnName="SquarePrice" />
+                <ScalarProperty Name="LodgersPrice" ColumnName="LodgersPrice" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="SupposedDatePayment" ColumnName="SupposedDatePayment" />
+                <ScalarProperty Name="DateOfPayment" ColumnName="DateOfPayment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfPayment">
+            <EntityTypeMapping TypeName="HOUSE_MANAGEMENTModel.TypeOfPayment">
+              <MappingFragment StoreEntitySet="TypeOfPayment">
+                <ScalarProperty Name="IdTypeOfPayment" ColumnName="IdTypeOfPayment" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
